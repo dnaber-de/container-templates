@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+
+if [[ -f /.dockerenv ]]; then
+    echo "This script should not run inside a container"
+    exit 1
+fi
+
+CMD="$@"
+
+if [[ -z ${CMD} ]]; then
+    CMD="/bin/bash"
+fi
+
+docker-compose up -d
+
+docker-compose exec --user www-data php "${CMD}"
+
+
+
