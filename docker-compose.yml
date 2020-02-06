@@ -15,7 +15,23 @@ services:
       - 9000
     volumes:
       - "./app:/var/www:rw"
+  db:
+    image: mariadb:10.4
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: db
+      MYSQL_DATABASE: db
+      MYSQL_USER: db
+      MYSQL_PASSWORD: db
+    expose:
+      - 3306
+    volumes:
+      - "./.docker/mariadb/data:/var/lib/mysql:rw"
 
+  #  httpd:
+  #    image: httpd:latest
+  #    volumes:
+  #     - ./test:/var/www
 
 
 

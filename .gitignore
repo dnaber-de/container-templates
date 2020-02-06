@@ -1,2 +1,4 @@
+.docker/mariadb/data
 app/vendor
 .env
+ssh
