@@ -14,7 +14,7 @@ services:
     expose:
       - 9000
     volumes:
-      - "./app:/var/www:rw"
+      - ./app:/var/www:rw
 
   db:
     image: mariadb:10.4
@@ -26,12 +26,16 @@ services:
     expose:
       - 3306
     volumes:
-      - "./.docker/mariadb/data:/var/lib/mysql:rw"
+      - ./.docker/mariadb/data:/var/lib/mysql:rw
 
-  #  httpd:
-  #    image: httpd:latest
-  #    volumes:
-  #     - ./test:/var/www
+  httpd:
+    build:
+      context: .
+      dockerfile: .docker/httpd/Dockerfile
+    volumes:
+      - ./app/public:/var/www/public:rw
+      # Enable if debugging of webserver is required:
+      #- .docker/httpd/logs:/var/log/apache2:rw
 
 
 

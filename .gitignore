@@ -1,4 +1,4 @@
 .docker/mariadb/data
+.docker/httpd/logs
 app/vendor
 .env
-ssh
