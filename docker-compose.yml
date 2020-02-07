@@ -15,9 +15,9 @@ services:
       - 9000
     volumes:
       - "./app:/var/www:rw"
+
   db:
     image: mariadb:10.4
-    restart: always
     environment:
       MYSQL_ROOT_PASSWORD: db
       MYSQL_DATABASE: db
