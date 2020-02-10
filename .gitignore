@@ -1,4 +1,7 @@
 .docker/mariadb/data
 .docker/httpd/logs
-app/vendor
+app/*
+!app/public/
+app/public/*
+!app/public/index.php
 .env
