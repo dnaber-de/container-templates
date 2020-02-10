@@ -1,4 +1,7 @@
 <?php
 declare(strict_types=1);
 
-// HTTP entry point
+require_once dirname(__DIR__) . '/vendor/autoload.php';
+
+echo '<h1>Container works!</h1>';
+
