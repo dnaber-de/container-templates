@@ -1,6 +1,20 @@
 version: "3.7"
 
 services:
+  httpd:
+    build:
+      context: .
+      dockerfile: .docker/httpd/Dockerfile
+    #    ports:
+    #    - "80:80"
+    networks:
+      default:
+        ipv4_address: 172.16.0.2
+    volumes:
+      - ./app/public:/var/www/public:rw
+      # Enable if debugging of webserver is required:
+      #- .docker/httpd/logs:/var/log/apache2:rw
+
   php:
     build:
       context: .
@@ -15,6 +29,9 @@ services:
       - 9000
     volumes:
       - ./app:/var/www:rw
+    networks:
+      default:
+        ipv4_address: 172.16.0.3
 
   db:
     image: mariadb:10.4
@@ -27,15 +44,14 @@ services:
       - 3306
     volumes:
       - ./.docker/mariadb/data:/var/lib/mysql:rw
+    networks:
+      default:
+        ipv4_address: 172.16.0.4
 
-  httpd:
-    build:
-      context: .
-      dockerfile: .docker/httpd/Dockerfile
-    volumes:
-      - ./app/public:/var/www/public:rw
-      # Enable if debugging of webserver is required:
-      #- .docker/httpd/logs:/var/log/apache2:rw
-
-
-
+# 172.16.0.0/12
+networks:
+  default:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.16.0.0/24
