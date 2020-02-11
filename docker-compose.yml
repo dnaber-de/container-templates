@@ -20,11 +20,12 @@ services:
     build:
       context: .
       dockerfile: .docker/php/Dockerfile
+      args:
+        PHP_UID: ${PHP_UID-1000}
+        PHP_GID: ${PHP_GID-1000}
+        PACKAGIST_USER: ${PACKAGIST_USER-}
+        PACKAGIST_TOKEN: ${PACKAGIST_TOKEN-}
     environment:
-      PHP_UID: ${PHP_UID-1000}
-      PHP_GID: ${PHP_GID-1000}
-      PACKAGIST_USER: ${PACKAGIST_USER-}
-      PACKAGIST_TOKEN: ${PACKAGIST_TOKEN-}
       DEBUG: "true"
       PHP_XDEBUG_ENABLED: 1
       XDEBUG_CONFIG: "remote_enable=1 remote_host=172.16.0.1 idekey=PHPSTORM profiler_enable=0"
