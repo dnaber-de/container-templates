@@ -51,6 +51,15 @@ services:
       default:
         ipv4_address: 172.16.0.4
 
+  memcached:
+    image: memcached:1.5.22-alpine
+    command: memcached -m 64 # sets storage capacity to 64M
+    expose:
+      - 11211
+    networks:
+      default:
+        ipv4_address: 172.16.0.5
+
 # 172.16.0.0/12
 networks:
   default:
