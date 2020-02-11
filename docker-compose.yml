@@ -5,15 +5,16 @@ services:
     build:
       context: .
       dockerfile: .docker/httpd/Dockerfile
-    #    ports:
-    #    - "80:80"
-    networks:
-      default:
-        ipv4_address: 172.16.0.2
     volumes:
       - ./app/public:/var/www/public:rw
       # Enable if debugging of webserver is required:
       #- .docker/httpd/logs:/var/log/apache2:rw
+#    ports:
+#    - "80:80"
+    networks:
+      default:
+        ipv4_address: 172.16.0.2
+
 
   php:
     build:
