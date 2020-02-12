@@ -37,6 +37,11 @@ RUN apk add --no-cache \
     git \
     openssh
 
+# PHP configuration
+RUN ln -s /usr/local/etc/php/php.ini-development /usr/local/etc/php/php.ini
+RUN mkdir /var/log/php
+RUN chown www-data:www-data /var/log/php
+
 # Allow www-data to self-update composer
 RUN chown www-data:www-data /usr/bin/composer
 
@@ -57,8 +62,6 @@ ARG PACKAGIST_TOKEN='p4ssw0rd'
 USER www-data
 RUN composer config --global --auth http-basic.repo.packagist.com $PACKAGIST_USER $PACKAGIST_TOKEN
 
-#COPY .docker/php/entrypoint.sh /docker/
-#RUN chmod +x /docker/entrypoint.sh
-#ENTRYPOINT ["/docker/entrypoint.sh"]
+
 
 WORKDIR /var/www

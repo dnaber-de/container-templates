@@ -8,7 +8,7 @@ services:
     volumes:
       - ./app/public:/var/www/public:rw
     #  Enable if debugging of webserver is required:
-    #  - .docker/httpd/logs:/var/log/apache2:rw
+      - ./.logs/httpd:/var/log/apache2:rw
     networks:
       default:
         ipv4_address: 172.16.0.2
@@ -36,8 +36,9 @@ services:
     volumes:
       - ./app:/var/www:rw
       - .docker/php/php.ini:/usr/local/etc/php/conf.d/custom-php.ini
-      - ${GITHUB_SSH_KEY}:/home/www-data/.ssh/id_rsa_github
-      - ${BITBUCKET_SSH_KEY}:/home/www-data/.ssh/id_rsa_bitbucket
+      - ./.logs/php:/var/log/php:rw
+      - ${GITHUB_SSH_KEY}:/home/www-data/.ssh/id_rsa_github:ro
+      - ${BITBUCKET_SSH_KEY}:/home/www-data/.ssh/id_rsa_bitbucket:ro
     networks:
       default:
         ipv4_address: 172.16.0.3
