@@ -67,7 +67,6 @@ services:
       default:
         ipv4_address: 172.16.0.5
 
-# 172.16.0.0/12
 networks:
   default:
     driver: bridge
