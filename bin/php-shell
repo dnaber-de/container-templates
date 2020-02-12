@@ -1,19 +1,18 @@
 #!/usr/bin/env bash
 
-if [[ -f /.dockerenv ]]; then
-    echo "This script should not run inside a container"
-    exit 1
-fi
-
 CMD="$@"
 
 if [[ -z ${CMD} ]]; then
     CMD="/bin/bash"
 fi
 
+if [[ -f /.dockerenv ]]; then
+    eval ${CMD}
+    exit $?
+fi
 docker-compose up -d
 
-docker-compose exec --user www-data php "${CMD}"
+eval docker-compose exec --user www-data php ${CMD}
 
 
 
