@@ -15,7 +15,6 @@ services:
       default:
         ipv4_address: 172.16.0.2
 
-
   php:
     build:
       context: .
@@ -34,6 +33,8 @@ services:
       - 9000
     volumes:
       - ./app:/var/www:rw
+      - ${GITHUB_SSH_KEY}:/home/www-data/.ssh/id_rsa_github
+      - ${BITBUCKET_SSH_KEY}:/home/www-data/.ssh/id_rsa_bitbucket
     networks:
       default:
         ipv4_address: 172.16.0.3

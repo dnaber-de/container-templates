@@ -34,10 +34,18 @@ RUN pecl install xdebug 2.7.2 \
 
 RUN apk add --no-cache \
     bash \
-    git
+    git \
+    openssh
 
 # Allow www-data to self-update composer
 RUN chown www-data:www-data /usr/bin/composer
+
+# Init ssh config
+RUN mkdir /home/www-data/.ssh
+COPY .docker/php/ssh-config /home/www-data/.ssh/config
+RUN chown -R www-data:www-data /home/www-data/.ssh \
+    && chmod 0700 /home/www-data/.ssh \
+    && chmod 0600 /home/www-data/.ssh/config
 
 ARG PHP_UID=1000
 ARG PHP_GID=1000
