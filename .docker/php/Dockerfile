@@ -32,6 +32,17 @@ RUN docker-php-ext-install \
 RUN pecl install xdebug 2.7.2 \
     && docker-php-ext-enable xdebug
 
+# Memcached extension
+# if you don't need it you can remove the next two
+# RUN commands completely
+RUN apk add --update --no-cache \
+    libmemcached-dev \
+    libmemcached-libs \
+    cyrus-sasl-dev \
+    zlib
+RUN pecl install memcached \
+    && docker-php-ext-enable memcached
+
 RUN apk add --no-cache \
     bash \
     git \
@@ -61,7 +72,5 @@ ARG PACKAGIST_USER='user'
 ARG PACKAGIST_TOKEN='p4ssw0rd'
 USER www-data
 RUN composer config --global --auth http-basic.repo.packagist.com $PACKAGIST_USER $PACKAGIST_TOKEN
-
-
 
 WORKDIR /var/www
