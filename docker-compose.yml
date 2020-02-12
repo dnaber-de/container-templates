@@ -35,6 +35,7 @@ services:
       - 9000
     volumes:
       - ./app:/var/www:rw
+      - .docker/php/php.ini:/usr/local/etc/php/conf.d/custom-php.ini
       - ${GITHUB_SSH_KEY}:/home/www-data/.ssh/id_rsa_github
       - ${BITBUCKET_SSH_KEY}:/home/www-data/.ssh/id_rsa_bitbucket
     networks:
