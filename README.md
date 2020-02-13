@@ -50,7 +50,17 @@ Now you have the following services:
  * **kibana**: with Address: `172.16.0.7:5601`
 
 ## VHost config and document root
-The document root is set to `app/public` but can be changed in `.docker/httpd/container-vhost.conf`.
+The document root is set to `app/public` but can be changed in `.docker/httpd/container-vhost.conf`. By default Apache's error logs are not mapped to the host. If you need them, uncomment the volume section in docker-compose.yml:
+
+    services:
+      httpd:
+        build:
+          context: .
+          dockerfile: .docker/httpd/Dockerfile
+        volumes:
+          - ./app/public:/var/www/public:rw
+          #  Enable if debugging of webserver is required:
+          - ./.logs/httpd:/var/log/apache2:rw
 
 ## PHP configuration
 The php service is configured with a default development configuration. If you want to change some configuration values you can do so by editing `.docker/php/php.ini`
