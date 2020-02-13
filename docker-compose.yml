@@ -67,6 +67,19 @@ services:
       default:
         ipv4_address: 172.16.0.5
 
+  elasticsearch:
+    image: elasticsearch:7.6.0
+    environment:
+      discovery.type: single-node
+    expose:
+      - 9200
+      - 9300
+    volumes:
+      - ./.docker/elasticsearch/data:/usr/share/elasticsearch/data:rw
+    networks:
+      default:
+        ipv4_address: 172.16.0.6
+
 networks:
   default:
     driver: bridge

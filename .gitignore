@@ -1,4 +1,5 @@
 .docker/mariadb/data
+.docker/elasticsearch/data
 .logs/*
 app/*
 .env
