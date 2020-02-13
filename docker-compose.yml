@@ -80,6 +80,12 @@ services:
       default:
         ipv4_address: 172.16.0.6
 
+  kibana:
+    image: kibana:7.6.0
+    networks:
+      default:
+        ipv4_address: 172.16.0.7
+
 networks:
   default:
     driver: bridge

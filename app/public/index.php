@@ -8,11 +8,13 @@ if(array_key_exists('info', $_GET)) {
     exit;
 }
 
+$kibanaAddress = gethostbyname('kibana');
 echo '<h1>Hello container visitor</h1>';
 echo "<p>
 Container IP: {$_SERVER['SERVER_ADDR']}<br>
 Client IP: {$_SERVER['REMOTE_ADDR']}<br>
-<a href='?info'>PHP Info</a>
+<a href='?info'>PHP Info</a><br>
+<a href='//{$kibanaAddress}:5601'>Kibana</a>
 </p>";
 
 echo '<h2>Database</h2>';
