@@ -7,8 +7,8 @@ services:
       dockerfile: .docker/httpd/Dockerfile
     volumes:
       - ./app/public:/var/www/public:rw
-    #  Enable if debugging of webserver is required:
-      - ./.logs/httpd:/var/log/apache2:rw
+      #  Enable if debugging of webserver is required:
+      #- ./.logs/httpd:/var/log/apache2:rw
     networks:
       default:
         ipv4_address: 172.16.0.2
@@ -82,6 +82,9 @@ services:
 
   kibana:
     image: kibana:7.6.0
+    # uncomment if you want to map the port to localhost
+    #ports:
+    #  - 5601:5601
     networks:
       default:
         ipv4_address: 172.16.0.7
