@@ -1,5 +1,6 @@
 .docker/mariadb/data
 .docker/elasticsearch/data
+.docker/php/.phive
 .logs/*
 app/*
 .env

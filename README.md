@@ -10,7 +10,7 @@ This is yet another docker compose template for a typical LAMP stack for PHP web
 Provided services:
 
 * httpd
-* php-fpm 7.4 with composer and SSH access to github and bitbucket
+* php-fpm 7.4 with composer, phive and SSH access to github and bitbucket
 * mariadb 10.4
 * memcached
 

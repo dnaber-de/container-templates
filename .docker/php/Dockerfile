@@ -43,10 +43,26 @@ RUN apk add --update --no-cache \
 RUN pecl install memcached \
     && docker-php-ext-enable memcached
 
+# Add bash, git, openssh and gnupg
 RUN apk add --no-cache \
     bash \
     git \
-    openssh
+    openssh \
+    # required for phive
+    gnupg \
+    ncurses
+
+# Install phive
+# If you don't need it remove the following
+# RUN command
+RUN set -e \
+    && wget -O /tmp/phive.phar https://phar.io/releases/phive.phar \
+    && wget -O /tmp/phive.phar.asc https://phar.io/releases/phive.phar.asc \
+    && gpg --keyserver pool.sks-keyservers.net --recv-keys 0x9D8A98B29B2D5D79 \
+    && gpg --verify /tmp/phive.phar.asc /tmp/phive.phar \
+    && chmod +x /tmp/phive.phar \
+    && mv /tmp/phive.phar /usr/local/bin/phive \
+    && chown www-data:www-data /usr/local/bin/phive
 
 # PHP configuration
 RUN ln -s /usr/local/etc/php/php.ini-development /usr/local/etc/php/php.ini
