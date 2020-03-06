@@ -13,6 +13,8 @@ Provided services:
 * php-fpm 7.4 with composer, phive and SSH access to github and bitbucket
 * mariadb 10.4
 * memcached
+* Elasticsearch
+* Kibana
 
 ## Directory structure
 
