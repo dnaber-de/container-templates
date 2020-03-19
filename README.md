@@ -77,7 +77,7 @@ The database host is available with the following credentials:
     Password: db
     Database name: db
 
-wheras Memcached is available via
+whereas Memcached is available via
 
     Host: memcached
     Port: 11211
