@@ -59,7 +59,16 @@ RUN apk add --no-cache \
 RUN set -e \
     && wget -O /tmp/phive.phar https://phar.io/releases/phive.phar \
     && wget -O /tmp/phive.phar.asc https://phar.io/releases/phive.phar.asc \
-    && gpg --keyserver pool.sks-keyservers.net --recv-keys 0x9D8A98B29B2D5D79 \
+    && for KEYSERVER in \
+        pool.sks-keyservers.net \
+        pgp.mit.edu \
+        ha.pool.sks-keyservers.net \
+    ; do \
+        if gpg --keyserver $KEYSERVER --recv-keys 0x9D8A98B29B2D5D79 \
+        ; then \
+            break \
+        ; fi \
+    ; done \
     && gpg --verify /tmp/phive.phar.asc /tmp/phive.phar \
     && chmod +x /tmp/phive.phar \
     && mv /tmp/phive.phar /usr/local/bin/phive \
