@@ -13,7 +13,8 @@ RUN apk add --update --virtual .run-deps --no-cache \
     openssl-dev \
     shadow \
     composer \
-    mysql-client
+    mysql-client \
+    npm
 
 RUN docker-php-ext-install \
     bcmath \
