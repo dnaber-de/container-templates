@@ -31,7 +31,7 @@ RUN docker-php-ext-install \
     xsl \
     zip
 
-RUN pecl install xdebug 2.7.2 \
+RUN pecl install xdebug \
     && docker-php-ext-enable xdebug
 
 RUN pecl install apcu \
