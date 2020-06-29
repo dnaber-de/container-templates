@@ -4,3 +4,4 @@
 .logs/*
 app/*
 .env
+docker-compose.override.yml
