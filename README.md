@@ -41,7 +41,8 @@ Provided services:
 
 1. Clone this directory and remove `.git` and edit `.gitignore` (removing `app/` from it) as you usually want to start a new project with its own version history.
 2. Copy `.env.example` to `.env` and fill in all variables.
-3. Run `docker-compose up -d` and you should be able to browse `http://172.16.0.2` and see a welcome page. If you want to run several of these environments parallel, you have to adapt the subnet mask and IP addresses of the containers (see below). Don't worry if you see warnings during the build of the php container. They come from the memcached pecl extensions and can be ignored.
+3. (optional) search/replace `172.16.0.` (in `docker-compose.yml`) with a custom net segment (e.g. `172.16.123.`) to avoid collisions with other setups _running at the same time_
+4. Run `docker-compose up -d` and you should be able to browse `http://172.16.0.2` and see a welcome page. If you want to run several of these environments parallel, you have to adapt the subnet mask and IP addresses of the containers (see below). Don't worry if you see warnings during the build of the php container. They come from the memcached pecl extensions and can be ignored.
 
 Now you have the following services:
 
