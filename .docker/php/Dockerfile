@@ -100,8 +100,7 @@ ARG PACKAGIST_TOKEN='p4ssw0rd'
 USER www-data
 RUN composer config --global --auth http-basic.repo.packagist.com $PACKAGIST_USER $PACKAGIST_TOKEN
 
-# Add more bin directories to path if you want
-# for example /var/www/vendor/bin
-ENV PATH="${PATH}:/var/www/bin"
+# Add paths for executables to PATH (composer, phive)
+ENV PATH="${PATH}:/var/www/bin:/var/www/vendor/bin:/var/www/tools"
 
 WORKDIR /var/www
