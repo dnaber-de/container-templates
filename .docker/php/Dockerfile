@@ -34,6 +34,9 @@ RUN docker-php-ext-install \
 RUN pecl install xdebug 2.7.2 \
     && docker-php-ext-enable xdebug
 
+RUN pecl install apcu \
+    && docker-php-ext-enable apcu
+
 # Memcached extension
 # if you don't need it you can remove the next two
 # RUN commands completely
