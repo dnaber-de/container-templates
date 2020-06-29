@@ -30,7 +30,7 @@ services:
       DEBUG: "true"
       PHP_XDEBUG_ENABLED: 1
       XDEBUG_CONFIG: "remote_enable=1 remote_host=172.16.0.1 idekey=PHPSTORM profiler_enable=0"
-      PHP_IDE_CONFIG: "serverName=container-templates"
+      PHP_IDE_CONFIG: "serverName=${COMPOSE_PROJECT_NAME}"
     expose:
       - 9000
     volumes:
