@@ -6,6 +6,7 @@ RUN apk add --update --virtual .run-deps --no-cache \
     $PHPIZE_DEPS \
     bzip2-dev \
     gettext-dev \
+    icu-dev \
     libpng-dev \
     libzip-dev \
     libxml2-dev \
@@ -23,6 +24,7 @@ RUN docker-php-ext-install \
     exif \
     gettext \
     gd \
+    intl \
     mysqli \
     pdo_mysql \
     phar \
