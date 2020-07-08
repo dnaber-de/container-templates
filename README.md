@@ -1,11 +1,6 @@
 # Container Templates
 
-This is yet another docker compose template for a typical LAMP stack for PHP web development. I created it with a few ideas in mind:
-
-* Figure out how these docker and docker-compose things work
-* Having a not to complex but flexible point to start from
-* Having a dev enviroment at the end that works on (hopefully) all operating systems
-* Keeping things simple and secure (for example I don't like the idea to give containers or even scripts access to my hosts file)
+This is yet another docker compose template for a typical LAMP stack for PHP web development.
 
 Provided services:
 
