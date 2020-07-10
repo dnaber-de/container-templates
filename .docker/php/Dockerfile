@@ -29,6 +29,7 @@ RUN docker-php-ext-install \
     pdo_mysql \
     phar \
     soap \
+    sockets \
     xmlrpc \
     xsl \
     zip
