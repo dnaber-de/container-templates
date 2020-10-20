@@ -15,7 +15,9 @@ RUN apk add --update --virtual .run-deps --no-cache \
     shadow \
     composer \
     mysql-client \
-    npm
+    npm \
+    yarn \
+    rsync
 
 RUN docker-php-ext-install \
     bcmath \
