@@ -35,6 +35,8 @@ services:
       PAGER: "more"
     expose:
       - 9000
+    extra_hosts:
+        - "${DEV_HOST_NAME}:172.16.0.2"
     volumes:
       - ./app:/var/www:rw
       - ./.docker/php/php.ini:/usr/local/etc/php/conf.d/custom-php.ini
