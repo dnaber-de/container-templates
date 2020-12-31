@@ -29,7 +29,9 @@ services:
     environment:
       DEBUG: "true"
       PHP_XDEBUG_ENABLED: 1
-      XDEBUG_CONFIG: "remote_enable=1 remote_host=172.16.0.1 idekey=PHPSTORM profiler_enable=0"
+      XDEBUG_MODE: "debug"
+      XDEBUG_SESSION: "PHPSTORM"
+      XDEBUG_CONFIG: "client_host=172.16.0.1"
       PHP_IDE_CONFIG: "serverName=${COMPOSE_PROJECT_NAME}"
       # required for WP-CLI manuals
       PAGER: "more"
