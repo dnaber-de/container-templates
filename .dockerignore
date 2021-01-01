@@ -1,0 +1,3 @@
+# Prevent docker-compose to complain about
+# file permission issues when (re)build any container
+.docker/mariadb/data/
