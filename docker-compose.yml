@@ -7,6 +7,8 @@ services:
       dockerfile: .docker/httpd/Dockerfile
     volumes:
       - ./app/public:/var/www/public:rw
+      - ./.docker/httpd/certs/server.crt:/usr/local/apache2/conf/server.crt
+      - ./.docker/httpd/certs/server.key:/usr/local/apache2/conf/server.key
       #  Enable if debugging of webserver is required:
       #- ./.logs/httpd:/var/log/apache2:rw
     networks:
@@ -16,6 +18,7 @@ services:
     # so http://localhost:80 will be the address of the
     #ports:
     # - "80:80"
+    # - "443:443"
 
   php:
     build:

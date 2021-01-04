@@ -4,7 +4,7 @@ This is yet another docker compose template for a typical LAMP stack for PHP web
 
 Provided services:
 
-* httpd
+* httpd with https setup on port 443 (port 80 is possible but needs some adjustments)
 * php-fpm 7.4 with composer, phive and SSH access to github and bitbucket
 * mariadb 10.4
 * memcached
@@ -34,14 +34,17 @@ Provided services:
 
 ## Bootstrapping
 
+The usage of [mkcert](https://github.com/FiloSottile/mkcert) is recommendet. However the script `bin/build-cert` depends on it.
+
 1. Clone this directory and remove `.git` and edit `.gitignore` (removing `app/` from it) as you usually want to start a new project with its own version history.
 2. Copy `.env.example` to `.env` and fill in all variables.
-3. (optional) search/replace `172.16.0.` (in `docker-compose.yml`) with a custom net segment (e.g. `172.16.123.`) to avoid collisions with other setups _running at the same time_
-4. Run `docker-compose up -d` and you should be able to browse `http://172.16.0.2` and see a welcome page. If you want to run several of these environments parallel, you have to adapt the subnet mask and IP addresses of the containers (see below). Don't worry if you see warnings during the build of the php container. They come from the memcached pecl extensions and can be ignored.
+3. From the project directory run `bin/build-cert`. Note that the variables `DEV_HOST_NAME` and optionally `DEV_HOST_ALIAS` will be taken into account. (This step requires `mkcert`)
+4. (optional) search/replace `172.16.0.` (in `docker-compose.yml`) with a custom net segment (e.g. `172.16.123.`) to avoid collisions with other setups _running at the same time_
+5. Run `docker-compose up -d` and you should be able to browse `http://172.16.0.2` and see a welcome page. If you want to run several of these environments parallel, you have to adapt the subnet mask and IP addresses of the containers (see below). Don't worry if you see warnings during the build of the php container. They come from the memcached pecl extensions and can be ignored.
 
 Now you have the following services:
 
- * **httpd (Apache2)**: with address `172.16.0.2:80`
+ * **httpd (Apache2)**: with address `172.16.0.2:443`
  * **mariadb**: with Host: `db:3306` User: `db`, Password: `db`, Database: `db`
  * **memcached**: with Host: `memcached:11211`
  * **elasticsearch**: with Host: `elasticsearch:9200`
@@ -59,6 +62,8 @@ The document root is set to `app/public` but can be changed in `.docker/httpd/co
           - ./app/public:/var/www/public:rw
           #  Enable if debugging of webserver is required:
           - ./.logs/httpd:/var/log/apache2:rw
+
+If you don't need https you can use plain http. Just use the `container-vhost-port-80.conf` instead of `container-vhost.conf` file and uncomment the suggested line in `.docker/httpd/modules.conf`. Remove the `server.key` and `server.crt` from the volumes of the httpd container in `docker-compose.yml`.
 
 ## PHP configuration
 The php service is configured with a default development configuration. If you want to change some configuration values you can do so by editing `.docker/php/php.ini`

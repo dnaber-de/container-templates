@@ -1,0 +1,61 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+# shellcheck disable=SC2199
+if [[ "${@}" =~ "-h" ]]; then
+        cat <<EOF
+Build certificate for DEV_HOST_NAME using mkcert
+Using ./.docker/httpd/certs to place cert files
+
+USAGE
+        ${0} [-h]
+
+PARAMETER
+
+    -h       Print this help
+
+EOF
+exit 0
+fi;
+
+if [ -f "/.dockerenv" ]; then
+    echo "This script must run on your host system not inside a container"
+    exit 1
+fi
+
+CERT_CMD=mkcert
+if ! { command -v $CERT_CMD || which $CERT_CMD || type -p $CERT_CMD ; } 2>/dev/null 1>&2 ; then
+    echo "Command $CERT_CMD not found"
+    exit 1
+fi
+
+if [ -f ./.env ]; then
+    #shellcheck disable=SC1091
+    source ./.env
+fi
+
+if [ -z "${DEV_HOST_NAME+x}" ]; then
+    echo "DEV_HOST_NAME is not defined. Do your have a .env file in plase?"
+    exit 1
+fi
+
+CERT_DIR=./.docker/httpd/certs
+if [ ! -d $CERT_DIR ]; then
+    echo "Directory $CERT_DIR not found"
+    exit 1
+fi
+
+CERT_HOSTS=$DEV_HOST_NAME
+if [ ! -z "${DEV_HOST_ALIAS+x}" ]; then
+    CERT_HOSTS="$CERT_HOSTS $DEV_HOST_ALIAS"
+fi
+
+echo "Generating certificate for hostname $CERT_HOSTS"
+
+# shellcheck disable=SC2086
+(cd $CERT_DIR && mkcert $CERT_HOSTS)
+find $CERT_DIR -type f -name "${DEV_HOST_NAME}*-key.pem" -exec mv {} "${CERT_DIR}/server.key" \;
+find $CERT_DIR -type f -name "${DEV_HOST_NAME}*.pem" -exec mv {} "${CERT_DIR}/server.crt" \;
+
+echo "Done. You can read the certificate via 'openssl x509 -noout -text -in ${CERT_DIR}/server.crt'"
