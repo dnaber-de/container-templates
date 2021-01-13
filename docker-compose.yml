@@ -30,10 +30,8 @@ services:
         PACKAGIST_USER: ${PACKAGIST_USER-}
         PACKAGIST_TOKEN: ${PACKAGIST_TOKEN-}
     environment:
-      DEBUG: "true"
-      PHP_XDEBUG_ENABLED: 1
       XDEBUG_MODE: "debug"
-      XDEBUG_SESSION: "PHPSTORM"
+      XDEBUG_TRIGGER: "1"
       XDEBUG_CONFIG: "client_host=172.16.0.1"
       PHP_IDE_CONFIG: "serverName=${COMPOSE_PROJECT_NAME}"
       # required for WP-CLI manuals
