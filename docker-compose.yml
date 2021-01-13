@@ -47,6 +47,7 @@ services:
       - ./.docker/php/php.ini:/usr/local/etc/php/conf.d/custom-php.ini
       - ./.logs/php:/var/log/php:rw
       - ./.docker/php/.phive:/home/www-data/.phive:rw
+      - ./.docker/php/.bash_history:/home/www-data/.bash_history:rw
       - ${GITHUB_SSH_KEY}:/home/www-data/.ssh/id_rsa_github:ro
       - ${BITBUCKET_SSH_KEY}:/home/www-data/.ssh/id_rsa_bitbucket:ro
     networks:
